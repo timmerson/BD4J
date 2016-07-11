@@ -9,7 +9,7 @@ import com.restfb.Connection;
 import com.restfb.DefaultFacebookClient;
 import com.restfb.FacebookClient;
 import com.restfb.Parameter;
-import com.restfb.types.Post;
+import com.restfb.types.*;
 import java.util.List;
 
 /**
@@ -26,15 +26,22 @@ public class ExtractorFromFacebook {
         Connection<Post> result = fbClient.fetchConnection("SPDStuhr/feed", Post.class);
         for (List<Post> page : result) {
             for (Post post : page) {
-//                String message = post.getMessage();
+                String message = post.getMessage();
                 post = fbClient.fetchObject(post.getId(), Post.class, Parameter.with("fields", "from,to,likes.limit(0).summary(true),comments.limit(0).summary(true),shares.limit(0).summary(true)"));
-//                System.out.println("fb.com/" + post.getId());
-//                System.out.println("Message: " + message);
-//                System.out.println("Likes count: " + post.getLikesCount());
-//                System.out.println("Shares count: " + post.getSharesCount());
-//                System.out.println("Comments count: " + post.getCommentsCount());
-//                System.out.println("");
-//                System.out.println("");
+                System.out.println("fb.com/" + post.getId());
+                System.out.println("Message: " + message);
+                System.out.println("Likes count: " + post.getLikesCount());
+                System.out.println("Shares count: " + post.getSharesCount());
+                System.out.println("Comments count: " + post.getCommentsCount());
+                if (post.getCommentsCount() > 0) {
+                    System.out.println("Kommentare: ");
+                    List<Comment> comments = post.getComments().getData();
+                    for (Comment c : comments) {
+                        System.out.println(c.getMessage());
+                    }
+                }
+                System.out.println("");
+                System.out.println("");
                 counter++;
                 likes += post.getLikesCount();
                 shares += post.getSharesCount();
