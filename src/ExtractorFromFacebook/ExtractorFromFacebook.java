@@ -31,17 +31,17 @@ public class ExtractorFromFacebook {
             int counter = 0, likes = 0, com = 0, shares = 0;
             writer = new FileWriter("C:\\temp\\daten.csv");
             writer.append("POST_ID");
-            writer.append(";");
+            writer.append("|");
             writer.append("MESSAGE");
-            writer.append(";");
+            writer.append("|");
             writer.append("LIKES_COUNT");
-            writer.append(";");
+            writer.append("|");
             writer.append("SHARES_COUNT");
-            writer.append(";");
+            writer.append("|");
             writer.append("COMMENT_COUNT");
-            writer.append(";");
+            writer.append("|");
             writer.append("CREATED_TIME");
-            writer.append(";");
+            writer.append("|");
             writer.append("\n");
             Connection<Post> result = fbClient.fetchConnection("SPDStuhr/feed", Post.class);
             for (List<Post> page : result) {
@@ -54,38 +54,37 @@ public class ExtractorFromFacebook {
                         writer.append("fb.com/" + post.getId());
                     else
                         writer.append("");
-                    writer.append(";");
+                    writer.append("|");
                     if(message!= null)
                         writer.append(message);
                     else
                         writer.append("");
-                    writer.append(";");
+                    writer.append("|");
                     if (post.getLikesCount() != null) {
                         writer.append(post.getLikesCount().toString());
                     } else {
                         writer.append("");
                     }
-                    writer.append(";");
+                    writer.append("|");
                     if (post.getSharesCount() != null) {
                         writer.append(post.getSharesCount().toString());
                     } else {
                         writer.append("");
                     }
-                    writer.append(";");
+                    writer.append("|");
                     if (post.getCommentsCount() != null) {
                         writer.append(post.getCommentsCount().toString());
                     } else {
                         writer.append("");
                     }
-                    writer.append(";");
+                    writer.append("|");
                     if (date != null) {
                         writer.append(date.toString());
                     } else {
                         writer.append("");
                     }
-                    writer.append(";");
+                    writer.append("|");
                     writer.append("\n");
-                    writer.flush();
                 }
             }
             writer.flush();
