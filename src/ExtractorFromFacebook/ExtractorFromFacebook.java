@@ -34,10 +34,11 @@ public class ExtractorFromFacebook {
                 System.out.println("Shares count: " + post.getSharesCount());
                 System.out.println("Comments count: " + post.getCommentsCount());
                 if (post.getCommentsCount() > 0) {
-                    System.out.println("Kommentare: ");
-                    List<Comment> comments = post.getComments().getData();
-                    for (Comment c : comments) {
-                        System.out.println(c.getMessage());
+                    Connection<Comment> allComments = fbClient.fetchConnection(post.getId() + "/comments", Comment.class);
+                    for (List<Comment> postcomments : allComments) {
+                        for (Comment comment : postcomments) {
+                            System.out.println(comment.getMessage());
+                        }
                     }
                 }
                 System.out.println("");
