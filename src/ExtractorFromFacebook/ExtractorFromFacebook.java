@@ -43,6 +43,8 @@ public class ExtractorFromFacebook {
                 }
                 System.out.println("");
                 System.out.println("");
+                System.out.println("");
+                System.out.println("");
                 counter++;
                 likes += post.getLikesCount();
                 shares += post.getSharesCount();
